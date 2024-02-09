@@ -16,32 +16,17 @@ public class Main {
         tx.begin();
 
         try{
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
+            Movie movie=new Movie();
+            movie.setDirector("SungHo");
+            movie.setActor("BBB");
+            movie.setName("바람과 함꼐 사라지다");
+            movie.setPrice(10000);
 
-            Member member = new Member();
-            member.setUsername("member1");
-            member.changeTeam(team);
-            em.persist(member);
+            em.flush();
+            em.clear();
 
-            Member member2 = new Member();
-            member2.setUsername("member2");
-            member2.changeTeam(team);
-            em.persist(member2);
-
-
-            Team findTeam1=em.find(Team.class, team.getId());
-            System.out.println("findTeam1.getName() = " + findTeam1.getName());
-
-            Member findMember=em.find(Member.class, member.getId());
-            System.out.println("findMember = " + findMember.getUsername());
-
-            Team findTeam = member.getTeam();
-            System.out.println("findTeam.getName() = " + findTeam.getName());
-
-            System.out.println("findTeamMembers = " + findTeam.getMembers());
-            
+            Movie findMovie = em.find(Movie.class, movie.getId());
+            System.out.println("findMovie = " + findMovie);
 
             tx.commit();
         }catch(Exception e){
